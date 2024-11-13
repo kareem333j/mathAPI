@@ -1,7 +1,7 @@
 from blog.models import *
 from users.models import Profile
 
-front_url = 'https://math-society.vercel.app/'
+front_url = 'https://math-society.vercel.app'
 
 def send_notification_for_subscribers(course, notification, title, context):
     if notification == True or notification == 'true':
