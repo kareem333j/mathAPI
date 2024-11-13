@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     "corsheaders",
     'django_cleanup.apps.CleanupConfig',
-    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -81,44 +80,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME": "mathDB",
-#         "USER": "root",
-#         "PASSWORD": "admin",
-#         "HOST": "localhost",
-#         "PORT": "3306",
-#         'OPTIONS': {'charset': 'utf8mb4'},
-#     }
-# }
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "postgres",
-#         "USER": "postgres.rrogkldbsszqesfwhsho",
-#         "PASSWORD": "karemmagdy123",
-#         "HOST": "aws-0-eu-central-1.pooler.supabase.com",
-#         "PORT": "6543",
-#     }
-# }
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME": "mathAPI$mathAPI",
-#         "USER": "mathAPI",
-#         "PASSWORD": "kareem999jj",
-#         "HOST": "mathAPI.mysql.pythonanywhere-services.com",
-#         "PORT": "3306",
-#         "OPTIONS":{
-#             'init_command': "SET sql _mode='STRICT_TRANS_TABLES'",
-#             'charset': "utf8mb4"
-#         }
-#     }
-# }
 
 
 # Password validation
