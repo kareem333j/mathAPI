@@ -188,12 +188,12 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOWED_ORIGINS = [  # who allowed to access in my DRF
-    'https://math-society.vercel.app/',
+    'https://math-society.vercel.app',
 ]
 
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^https://\w+\.example\.com$",
+    r"^https://\w+\.\w+\.app$",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
