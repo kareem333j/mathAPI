@@ -191,6 +191,7 @@ CORS_ALLOWED_ORIGINS = [  # who allowed to access in my DRF
     "http://127.0.0.1:5500",
     "http://192.168.1.33:3000",
     "http://localhost:3000",
+    'https://math-society.vercel.app',
 ]
 
 
