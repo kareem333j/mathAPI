@@ -83,54 +83,6 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME": "mathDB",
-#         "USER": "root",
-#         "PASSWORD": "admin",
-#         "HOST": "localhost",
-#         "PORT": "3306",
-#         'OPTIONS': {'charset': 'utf8mb4'},
-#     }
-# }
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "postgres",
-#         "USER": "postgres.rrogkldbsszqesfwhsho",
-#         "PASSWORD": "karemmagdy123",
-#         "HOST": "aws-0-eu-central-1.pooler.supabase.com",
-#         "PORT": "6543",
-#     }
-# }
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME": "mathAPI$mathAPI",
-#         "USER": "mathAPI",
-#         "PASSWORD": "kareem999jj",
-#         "HOST": "mathAPI.mysql.pythonanywhere-services.com",
-#         "PORT": "3306",
-#         "OPTIONS":{
-#             'init_command': "SET sql _mode='STRICT_TRANS_TABLES'",
-#             'charset': "utf8mb4"
-#         }
-#     }
-# }
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "verceldb",
-#         "USER": "default",
-#         "PASSWORD": "aNdCngbe0W9S",
-#         "HOST": "ep-solitary-truth-13080581.us-east-1.aws.neon.tech",
-#         "PORT": "5432",
-#     }
-# }
 
 DATABASES['default'] = dj_database_url.config()
 
@@ -187,13 +139,8 @@ REST_FRAMEWORK = {
     ),
 }
 
-CORS_ALLOWED_ORIGINS = [  # who allowed to access in my DRF
-    'https://math-society.vercel.app',
-]
-
-
-CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^https://\w+\.\w+\.app$",
+CORS_ALLOWED_ORIGINS = [
+    "https://math-society.vercel.app",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
