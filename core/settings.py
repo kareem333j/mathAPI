@@ -41,10 +41,10 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",  # corsheaders to make other connect with my DRF
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",  # corsheaders to make other connect with my DRF
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -149,6 +149,10 @@ CORS_ALLOW_METHODS = [
     "PATCH",
     "POST",
     "PUT",
+]
+CORS_ALLOW_HEADERS = [
+    "content-type",
+    "authorization",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
