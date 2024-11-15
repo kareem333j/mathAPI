@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY", "default_secret_key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -160,7 +160,7 @@ SIMPLE_JWT = {
     "ISSUER": None,
     "JSON_ENCODER": None,
     "JWK_URL": None,
-    "LEEWAY": 0,
+    "LEEWAY": 10,
     "AUTH_HEADER_TYPES": ("Bearer", "JWT"),
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
     "USER_ID_FIELD": "id",
