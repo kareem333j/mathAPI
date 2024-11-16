@@ -11,6 +11,12 @@
       "use": "@vercel/python"
     }
   ],
+  "rewrites": [
+    { 
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    }
+  ],
   "routes": [
     {
       "src": "/static/(.*)",
