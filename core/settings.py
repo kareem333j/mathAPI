@@ -16,14 +16,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY", 'default-secret-key')
 # SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 # ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEPLOY')
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS_DEPLOY')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS_DEPLOY', '').split(',')
 
 
 # Application definition
@@ -136,14 +136,22 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # CORS_ALLOWED_ORIGINS = [
 #     "https://math-society.vercel.app",
 # ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+
 # CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS_DEPLOY')
 # CORS_ALLOWED_WHITELIST = env.list('CORS_ALLOWED_WHITELIST_DEPLOY')
-CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS_DEPLOY')
-CORS_ALLOWED_WHITELIST = os.getenv('CORS_ALLOWED_WHITELIST_DEPLOY')
+CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS_DEPLOY', '').split(',')
+CORS_ALLOWED_WHITELIST = os.getenv('CORS_ALLOWED_WHITELIST_DEPLOY', '').split(',')
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
-# CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ALLOW_CREDENTIALS = True
 
 # SIMPLE_JWT = {
 #     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
@@ -211,4 +219,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
 # CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS_DEPLOY')
-CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS_DEPLOY')
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS_DEPLOY', '').split(',')
