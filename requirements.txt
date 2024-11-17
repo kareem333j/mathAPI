@@ -1,6 +1,5 @@
 asgiref==3.8.1
 dj-database-url==2.3.0
-environ==1.0
 Django==5.0.7
 django-cleanup==9.0.0
 django-cors-headers==4.4.0
