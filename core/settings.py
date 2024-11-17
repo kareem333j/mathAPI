@@ -20,10 +20,12 @@ SECRET_KEY = os.getenv("SECRET_KEY", 'default-secret-key')
 # SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEPLOY')
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS_DEPLOY', '').split(',')
+# ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS_DEPLOY', '').split(',')
+ALLOWED_HOSTS = ["math-society.vercel.app", "127.0.0.1", "localhost", ".vercel.app", "*.vercel.app"]
+
 
 
 # Application definition
@@ -123,7 +125,7 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 AUTH_USER_MODEL = "users.NewUser"
 
@@ -136,12 +138,20 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 #     "https://math-society.vercel.app",
 # ]
 
+CORS_ALLOWED_ORIGINS = [
+    "https://math-society.vercel.app",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://math-society.vercel.app",
+]
+
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 
 # CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS_DEPLOY')
 # CORS_ALLOWED_WHITELIST = env.list('CORS_ALLOWED_WHITELIST_DEPLOY')
@@ -218,4 +228,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
 # CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS_DEPLOY')
-CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS_DEPLOY', '').split(',')
+# CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS_DEPLOY', '').split(',')
