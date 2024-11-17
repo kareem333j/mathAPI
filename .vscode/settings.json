@@ -4,6 +4,7 @@
         "nostatic",
         "quizs",
         "simplejwt",
+        "vercel",
         "whitenoise",
         "wsgi"
     ]
