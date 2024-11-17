@@ -24,7 +24,7 @@ DEBUG = False
 
 # ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEPLOY')
 # ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS_DEPLOY', '').split(',')
-ALLOWED_HOSTS = ["math-society.vercel.app", "127.0.0.1", "localhost", ".vercel.app", "*.vercel.app"]
+ALLOWED_HOSTS = ["math-society.vercel.app", "127.0.0.1", "localhost", ".vercel.app", "*.vercel.app", ".vercel.live"]
 
 
 
