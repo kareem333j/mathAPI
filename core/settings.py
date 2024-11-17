@@ -140,10 +140,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ALLOWED_ORIGINS = [
     "https://math-society.vercel.app",
+    "https://math-society.vercel.app/",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://math-society.vercel.app",
+    "https://math-society.vercel.app/",
 ]
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^https://\w+\.\w+\.\w+$",
