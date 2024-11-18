@@ -1,6 +1,8 @@
 asgiref==3.8.1
 dj-database-url==2.3.0
 Django==5.0.7
+cloudinary==1.41.0
+django-cloudinary-storage==0.3.0
 django-cleanup==9.0.0
 django-cors-headers==4.4.0
 django-filter==24.2

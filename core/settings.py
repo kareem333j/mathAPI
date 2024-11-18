@@ -36,7 +36,10 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
-    'django_cleanup.apps.CleanupConfig',
+    # 'django_cleanup.apps.CleanupConfig',
+    # cloud -> media
+    'cloudinary',
+    'cloudinary_storage'
 ]
 
 MIDDLEWARE = [
@@ -186,6 +189,11 @@ REST_FRAMEWORK = {
     ),
 }
 
-# media
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_URL = "/media/"
+# cloud
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'drri0et21',
+    'API_KEY': '435676498228376',
+    'API_SECRET': 'CanY83y8alvsrNNMn29YtF21hlU',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
