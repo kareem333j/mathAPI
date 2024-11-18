@@ -535,13 +535,15 @@ class AddCourse(generics.CreateAPIView):
 
     def post(self, request, format=None):
         serializer = AddCourseSerializer(data=request.data)
-
+        print(request.data)
+        print(serializer)
         if serializer.is_valid():
             serializer.save()
             grade_id = request.data['grade']
             course_title = request.data['title']
             grade = get_object_or_404(Grade, pk=int(grade_id))
             send_notification_for_added_course(course_title, grade)
+            print(grade_id,course_title,grade)
             
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
