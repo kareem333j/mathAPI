@@ -3,10 +3,6 @@ import os
 from datetime import timedelta
 import dj_database_url
 from decouple import config
-# import environ
-
-# env = environ.Env()
-# environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,13 +19,9 @@ SECRET_KEY = os.getenv("SECRET_KEY", 'default-secret-key')
 DEBUG = False
 
 # ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEPLOY')
-# ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS_DEPLOY', '').split(',')
-ALLOWED_HOSTS = ["math-society.vercel.app", "127.0.0.1", "localhost", ".vercel.app", "*.vercel.app", ".vercel.live", "math-society.vercel.app/"]
-
-
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS_DEPLOY', '').split(',')
 
 # Application definition
-
 INSTALLED_APPS = [
     "corsheaders",
     "django.contrib.admin",
@@ -125,7 +117,6 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
-# STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 AUTH_USER_MODEL = "users.NewUser"
 
@@ -133,26 +124,8 @@ AUTH_USER_MODEL = "users.NewUser"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-
-# CORS_ALLOWED_ORIGINS = [
-#     "https://math-society.vercel.app",
-# ]
-
-CORS_ALLOWED_ORIGINS = [
-    "https://math-society.vercel.app",
-    "https://math-society.vercel.app/",
-]
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://math-society.vercel.app",
-    "https://math-society.vercel.app/",
-]
-CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^https://\w+\.\w+\.\w+$",
-]
-CORS_URLS_REGEX = r"^/api/.*$"
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS_DEPLOY', '').split(',')
+CORS_ALLOWED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS_DEPLOY', '').split(',')
 
 CORS_ALLOW_METHODS = (
     "DELETE",
@@ -177,43 +150,10 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SECURE = True
 
-# CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS_DEPLOY')
-# CORS_ALLOWED_WHITELIST = env.list('CORS_ALLOWED_WHITELIST_DEPLOY')
 CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS_DEPLOY', '').split(',')
 CORS_ALLOWED_WHITELIST = os.getenv('CORS_ALLOWED_WHITELIST_DEPLOY', '').split(',')
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-
-
-# SIMPLE_JWT = {
-#     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
-#     "REFRESH_TOKEN_LIFETIME": timedelta(days=10),
-#     "ROTATE_REFRESH_TOKENS": True,
-#     "BLACKLIST_AFTER_ROTATION": True,
-#     "UPDATE_LAST_LOGIN": True,
-#     "ALGORITHM": "HS256",
-#     "SIGNING_KEY": SECRET_KEY,
-#     "VERIFYING_KEY": "",
-#     "AUDIENCE": None,
-#     "ISSUER": None,
-#     "JSON_ENCODER": None,
-#     "JWK_URL": None,
-#     "LEEWAY": 10,
-#     "AUTH_HEADER_TYPES": ("JWT",),
-#     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
-#     "USER_ID_FIELD": "id",
-#     "USER_ID_CLAIM": "user_id",
-#     "USER_AUTHENTICATION_RULE": "rest_framework_simplejwt.authentication.default_user_authentication_rule",
-#     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
-#     "TOKEN_TYPE_CLAIM": "token_type",
-#     "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",
-#     "JTI_CLAIM": "jti",
-#     "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSerializer",
-#     "TOKEN_VERIFY_SERIALIZER": "rest_framework_simplejwt.serializers.TokenVerifySerializer",
-#     "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
-#     "TOKEN_OBTAIN_SERIALIZER": "math_api.serializers.MyTokenObtainPairSerializer",
-# }
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
@@ -223,8 +163,11 @@ SIMPLE_JWT = {
     "UPDATE_LAST_LOGIN": True,
     "ALGORITHM": "HS256",
     "SIGNING_KEY": SECRET_KEY,
-    # "VERIFYING_KEY": None,
+    "VERIFYING_KEY": None,
     "AUTH_HEADER_TYPES": ("JWT",),
+    "JWK_URL": None,
+    "LEEWAY": 10,
+    "JTI_CLAIM": "jti",
     "USER_ID_FIELD": "id",
     "USER_ID_CLAIM": "user_id",
     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
@@ -249,6 +192,3 @@ REST_FRAMEWORK = {
 # media
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
-
-# CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS_DEPLOY')
-# CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS_DEPLOY', '').split(',')
