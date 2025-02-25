@@ -128,7 +128,7 @@ class UserStatistics(serializers.BaseSerializer):
 class UserInvoices(serializers.BaseSerializer):
     def to_representation(self, instance):
         invoices = UserCourse.objects.filter(user=instance)
-        return invoices.values('transaction','course__title','is_active','request_dt','price')
+        return invoices.values('transaction','course__title','course_price','is_active','request_dt','price')
         
         
 class UserProfileAllDataSerializer(serializers.ModelSerializer):
@@ -435,7 +435,7 @@ class getTransactionNumberSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserCourse
         fields = ('user', 'course', 'is_active', 'transaction')
-        
+
 # notifications
 class GetNotificationsUnReadCountSerializer(serializers.ModelSerializer):
     count = serializers.SerializerMethodField()
@@ -572,7 +572,7 @@ class PaymentSerializer(serializers.ModelSerializer):
     course_info = getCourseFromItsRequest(source="*")
     class Meta:
         model = UserCourse
-        fields = ('id','price', 'request_dt', 'transaction', 'is_active', 'user_info', 'course_info')
+        fields = ('id','course_price','phone','price', 'request_dt', 'transaction', 'is_active', 'user_info', 'course_info')
 
 class CourseSubscribers(serializers.BaseSerializer):
     def to_representation(self, instance):

@@ -276,7 +276,37 @@ def create_new_ref_number():
 
 
 # user course
+# class UserCourse(models.Model):
+#     user = models.ForeignKey(
+#         NewUser, related_name="UserCourse", on_delete=models.CASCADE
+#     )
+#     course = models.ForeignKey(Course, related_name="Course", on_delete=models.CASCADE)
+#     is_active = models.BooleanField(default=False)
+#     request_dt = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+#     price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    
+#     transaction = models.CharField(unique=True ,max_length=10,blank=True,default=create_new_ref_number)
+#     # editable=False => to hide field from admin page and can't edit on it
+    
+#     # generate transaction number to user to payment process
+#     def create_new_ref_number():
+#         not_unique = True
+#         while not_unique:
+#             unique_ref = random.randint(1000000000, 9999999999)
+#             if not UserCourseProgress.objects.filter(transaction=unique_ref):
+#                 not_unique = False
+#         return str(unique_ref)
+    
+#     # def save(self,*args, **kwargs):
+#     #     self.transaction = get_random_string(10).lower()
+#     #     super(UserCourseProgress, self).save(*args, **kwargs)
+    
+
+#     def __str__(self):
+#         return f"{self.user.first_name} {self.user.last_name} - {self.course.title}"
+
 class UserCourse(models.Model):
+    phone = models.CharField(max_length=11, blank=False, null=False)
     user = models.ForeignKey(
         NewUser, related_name="UserCourse", on_delete=models.CASCADE
     )
@@ -284,28 +314,12 @@ class UserCourse(models.Model):
     is_active = models.BooleanField(default=False)
     request_dt = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    course_price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
     
-    transaction = models.CharField(unique=True ,max_length=10,blank=True,default=create_new_ref_number)
-    # editable=False => to hide field from admin page and can't edit on it
+    transaction = models.CharField(unique=True ,max_length=100,blank=False, null=False)
     
-    # generate transaction number to user to payment process
-    def create_new_ref_number():
-        not_unique = True
-        while not_unique:
-            unique_ref = random.randint(1000000000, 9999999999)
-            if not UserCourseProgress.objects.filter(transaction=unique_ref):
-                not_unique = False
-        return str(unique_ref)
-    
-    # def save(self,*args, **kwargs):
-    #     self.transaction = get_random_string(10).lower()
-    #     super(UserCourseProgress, self).save(*args, **kwargs)
-    
-
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name} - {self.course.title}"
-
-
 
 
 class UserCourseProgress(models.Model):
