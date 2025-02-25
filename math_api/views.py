@@ -16,6 +16,7 @@ from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
 from django.db.models import Q, Value
 from django.db.models.functions import Concat
 from datetime import datetime
+from decimal import Decimal
 from .utils import send_notification_for_subscribers,send_notification_sessions_for_subscribers,send_activation_message, front_url,send_notification_for_added_course
 
 # custom token override
@@ -319,7 +320,14 @@ class PaymentProcessOne(generics.CreateAPIView):
         user = request.user
         course = get_object_or_404(Course, pk=int(data["course"]))
 
-        user_course, create = UserCourse.objects.get_or_create(user=user, course=course, price=course.price)
+        user_course, create = UserCourse.objects.get_or_create(
+            user=user,
+            course=course,
+            price= "{:.2f}".format(Decimal(data['price'])),
+            course_price= course.price,
+            phone=data["phone"],
+            transaction=data["transaction_number"],
+        )
 
         if user_course:
             return Response(user_course.transaction, status=status.HTTP_201_CREATED)
@@ -339,6 +347,25 @@ class getTransactionNumber(generics.RetrieveAPIView):
         userCourse = get_object_or_404(UserCourse, user=user, course=course)
 
         return userCourse
+    
+class DeleteTransaction(generics.DestroyAPIView):
+    permission_classes = [UserIsAuthenticated]
+    queryset = UserCourse
+    
+    def destroy(self, request, *args, **kwargs):
+        print('self: ',self, '\n')
+        print('request: ',request, '\n')
+        print('args: ', args, '\n')
+        print('kwargs: ',kwargs, '\n')
+        user = self.request.user
+        try:
+            course = get_object_or_404(Course, pk=kwargs['course_id'])
+            instance = get_object_or_404(UserCourse, user=user, course=course)
+            self.perform_destroy(instance)
+            return Response(status=status.HTTP_200_OK)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+    
 
 class sendQuizResults(generics.CreateAPIView):
     permission_classes = [UserIsAuthenticated]
@@ -535,15 +562,13 @@ class AddCourse(generics.CreateAPIView):
 
     def post(self, request, format=None):
         serializer = AddCourseSerializer(data=request.data)
-        print(request.data)
-        print(serializer)
+
         if serializer.is_valid():
             serializer.save()
             grade_id = request.data['grade']
             course_title = request.data['title']
             grade = get_object_or_404(Grade, pk=int(grade_id))
             send_notification_for_added_course(course_title, grade)
-            print(grade_id,course_title,grade)
             
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
