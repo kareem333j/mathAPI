@@ -306,7 +306,7 @@ def create_new_ref_number():
 #         return f"{self.user.first_name} {self.user.last_name} - {self.course.title}"
 
 class UserCourse(models.Model):
-    phone = models.CharField(max_length=11, blank=False, null=False)
+    phone = models.CharField(max_length=11, blank=True, null=True)
     user = models.ForeignKey(
         NewUser, related_name="UserCourse", on_delete=models.CASCADE
     )
