@@ -262,7 +262,7 @@ class LectureSerializerChildren(serializers.BaseSerializer):
         
         
         # documents (pdf)
-        sub_lecture_documents = instance.LectureDocument.filter(active=True).values()
+        sub_lecture_documents = instance.LectureDocument.filter(active=True).values('title', 'description', 'lecture','type','priority','document', 'active')
         
         # quizzes
         sub_lecture_quizzes = instance.LectureQuiz.filter(active=True).values()
