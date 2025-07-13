@@ -190,6 +190,19 @@ class CourseSerializer(serializers.ModelSerializer):
             user_subscribed = False
             
         return user_subscribed
+
+class CoursesSerializerMainData(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = ['id', 'title', 'description', 'image', 'price', 'price_off', 'is_active', 'new']
+        
+class GradeWithCoursesSerializer(serializers.ModelSerializer):
+    courses = CourseSerializer(source='Grade', many=True)
+
+    class Meta:
+        model = Grade
+        fields = ['id', 'name', 'description', 'courses']
+
         
 class CourseSerializerFields(serializers.BaseSerializer):
     def to_representation(self, instance):
@@ -262,7 +275,7 @@ class LectureSerializerChildren(serializers.BaseSerializer):
         
         
         # documents (pdf)
-        sub_lecture_documents = instance.LectureDocument.filter(active=True).values('title', 'description', 'lecture','type','priority','document', 'active')
+        sub_lecture_documents = instance.LectureDocument.filter(active=True).values()
         
         # quizzes
         sub_lecture_quizzes = instance.LectureQuiz.filter(active=True).values()
@@ -538,7 +551,10 @@ class ProfileSerializerForAdmin(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ('id','user', 'parent_phone', 'state', 'gender', 'grade','is_private','extra_permissions','is_vip','userInfo')
-        
+
+# class UserByGradeSerializer(serializers.ModelSerializer):
+#     users = ProfileSerializerForAdmin(source='Grade', many=True)
+
 class AddCourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course

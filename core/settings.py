@@ -4,24 +4,18 @@ from datetime import timedelta
 import dj_database_url
 from decouple import config
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY", 'default-secret-key')
-# SECRET_KEY = os.environ.get("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+# DEBUG = True
 
-# ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEPLOY')
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS_DEPLOY', '').split(',')
+# ALLOWED_HOSTS = ["*"]
 
-# Application definition
 INSTALLED_APPS = [
     "corsheaders",
     "django.contrib.admin",
@@ -36,14 +30,12 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
-    # 'django_cleanup.apps.CleanupConfig',
-    # cloud -> media
     'cloudinary',
     'cloudinary_storage'
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",  # corsheaders to make other connect with my DRF
+    "corsheaders.middleware.CorsMiddleware",  
     "django.middleware.common.CommonMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -75,8 +67,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "core.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -89,8 +79,7 @@ DATABASES = {
 DATABASES['default'] = dj_database_url.config()
 
 
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -108,8 +97,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
 
@@ -150,6 +137,13 @@ CSRF_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SECURE = True
 
 CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS_DEPLOY', '').split(',')
+
+# CORS_ALLOWED_ORIGINS = [  # who allowed to access in my DRF
+#     "http://127.0.0.1:5500",
+#     "http://192.168.1.33:3000",
+#     "http://localhost:3000",
+# ]
+
 CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS_DEPLOY', '').split(',')
 CORS_ALLOWED_WHITELIST = os.getenv('CORS_ALLOWED_WHITELIST_DEPLOY', '').split(',')
 
@@ -188,7 +182,7 @@ REST_FRAMEWORK = {
         "rest_framework.parsers.MultiPartParser",
     ),
 }
-
+CORS_ALLOW_ALL_ORIGINS = True
 # cloud
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'drri0et21',

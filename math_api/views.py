@@ -526,8 +526,8 @@ class RemoveNotification(generics.DestroyAPIView):
 # course API for staff
 class CoursesViewManager(generics.ListCreateAPIView):
     permission_classes = [AdminAndStaffCustomPermissions]
-    serializer_class = CourseSerializer
-    queryset = Course.objects.all()
+    serializer_class = GradeWithCoursesSerializer
+    queryset = Grade.objects.all()
 
 class SearchCoursesView(generics.ListAPIView):
     permission_classes = [AdminAndStaffCustomPermissions]
